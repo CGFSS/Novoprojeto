@@ -38,8 +38,11 @@ public class Cliente {
     @Length(message="Nome com no máximo 50 caracteres",max=50)
     String nome;
 
-    @Column(name="nascimento")
-    Date nascimento;
+    @Column(name="datanascimento")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone = "EST")
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "data nascimento é obrigatório")
+    Date datanascimento;
 
     @Column(name="sexo")
     @NotBlank(message = "Sexo é obrigatória")
@@ -49,16 +52,12 @@ public class Cliente {
     @Column(name="cpf")
     @NotBlank(message = "cpf é obrigatório")
     @CPF(message="Deve ser um CPF valido")
-    @Length(message="CPF com 50 caracteres",max=50)
+    @Length(message="CPF com 11 caracteres",max=11)
     String cpf;
 
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="cliente_endereco",
-              joinColumns={@JoinColumn(name = "cliente_id",
-               referencedColumnName="id")},
-              inverseJoinColumns={@JoinColumn(name="endereco_id",
-               referencedColumnName="id")})
-
+    @JoinColumn(name = "endereco", referencedColumnName = "id")
+    @Valid
     Endereco endereco;
 
 
