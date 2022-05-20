@@ -7,16 +7,6 @@ create database banco;
 GRANT ALL PRIVILEGES ON banco.* TO 'root'@'localhost';
 -- Acesar o banco de dados: banco
 USE banco;
--- Criar a tabela: usuario
-CREATE TABLE cliente(
-    id int AUTO_INCREMENT,
-    nome varchar(50) NOT NULL,
-    nascimento date NOT NULL,
-    sexo varchar(1) NOT NULL,
-    cpf varchar(11) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_endereco) REFERENCES endereco (id)
-);
 
 CREATE TABLE endereco(
     id int AUTO_INCREMENT,
@@ -28,4 +18,16 @@ CREATE TABLE endereco(
     uf varchar(2) NOT NULL,
     PRIMARY KEY (id)
 );
+-- Criar a tabela: usuario
+CREATE TABLE cliente(
+    id int AUTO_INCREMENT,
+    nome varchar(50) NOT NULL,
+    nascimento date NOT NULL,
+    sexo varchar(1) NOT NULL,
+    cpf varchar(11) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_endereco) REFERENCES endereco (id)
+);
+
+
 
