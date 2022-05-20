@@ -58,16 +58,12 @@ public class Endereco{
     @Length(message="Cidade com no máximo 50 caracteres",max=50)
     String cidade;
 
-    @Column(name="uf")
-    @NotBlank(message = "UF é obrigatório")
-    @Length(message="UF com no máximo 2 caracteres",max=2)
-    String uf;
+    @Column(name = "uf")
+    @NotBlank(message = "uf é obrigatório")
+    @Pattern(regexp = "([A-Z]+)", message = "Utilize caracteres maiúsculos, exemplo: AM, RJ, SP")
+    @Length(message = "O campo uf tem que ter 2 caracteres, exemplo: AM, RJ, SP", min = 2, max = 2)
+    String UF;
     
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="cliente_endereco",
-            joinColumns={@JoinColumn(name="endereco_id",
-              referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="cliente_id",
-              referencedColumnName="id")})
-    Cliente cliente;
+   @OneToOne(mappedBy = "endereco")
+    private Cliente cliente;
 }
